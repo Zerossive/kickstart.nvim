@@ -26,6 +26,11 @@ return {
 				['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
 				['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
 			}
+			-- visual mode
+			require('which-key').register({
+				['<leader>c'] = { '[C]ode' },
+				['<leader>h'] = { 'Git [H]unk' },
+			}, { mode = 'v' })
 		end,
 	},
 	{ 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
