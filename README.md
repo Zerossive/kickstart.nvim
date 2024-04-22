@@ -181,7 +181,7 @@ sudo apt install -t unstable neovim
 <details><summary>Fedora Install Steps</summary>
 
 ```
-sudo dnf install -y gcc make git ripgrep fd-find neovim
+sudo dnf install -y gcc make git ripgrep fd-find neovim npm
 ```
 </details>
 
