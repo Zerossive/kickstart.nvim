@@ -131,17 +131,20 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Move up 1/2 page and center' })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Move down 1/2 page and center' })
 vim.keymap.set('n', '<Leader>on', ':cd ~/.config/nvim | SessionRestore<CR>', { desc = '[O]pen [N]eovim Config' })
+vim.keymap.set('n', '<leader>oo', ':cd ~/Elysium/Obsidian\\ Vault/ | SessionRestore<CR>', { desc = '[O]pen [O]bsidian Vault' })
 vim.keymap.set('n', '<Leader>w', ':w<CR>', { desc = '[W]rite File' })
 vim.keymap.set('n', '<Leader>q', ':q<CR>', { desc = '[Q]uit File' })
 vim.keymap.set('n', '<leader>o.', ':cd %:p:h<CR>', { desc = '[O]pen [.] as Root Directory' })
 vim.keymap.set('n', '<leader>od', ':!dolphin ~/.local/share/nvim/sessions &<CR>', { desc = '[O]pen [D]irectory of Session Storage' })
 vim.keymap.set('n', '<leader><enter>', '<C-^>', { desc = '[Enter] Previous Buffer' })
-
 vim.keymap.set('n', '<leader>cc', function()
 	local cursor_position = vim.api.nvim_win_get_cursor(0)
 	vim.cmd 'normal GVggy'
 	vim.api.nvim_win_set_cursor(0, cursor_position)
 end, { desc = '[C]opy All [C]ode' })
+vim.keymap.set('n', '<leader>cn', ':cnext<CR>', { desc = '[N]ext Quickfix' })
+vim.keymap.set('n', '<leader>cp', ':cprevious<CR>', { desc = '[P]revious Quickfix' })
+
 -- Insert mode
 vim.keymap.set('i', 'jj', '<Escape>', { desc = 'Normal Mode' })
 vim.keymap.set('i', '<C-BS>', '<Del>', { desc = 'Forward Delete' })

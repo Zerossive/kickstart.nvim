@@ -50,9 +50,17 @@ return {
 				end, { desc = 'git [D]iff against last commit' })
 				-- Toggles
 				map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
-				map('n', '<leader>tD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
+				map('n', '<leader>td', gitsigns.toggle_deleted, { desc = '[T]oggle git show [d]eleted' })
 			end,
 		},
 	},
-	{ 'tpope/vim-fugitive' },
+	{
+		'tpope/vim-fugitive',
+		config = function()
+			vim.keymap.set('n', '<leader>gg', ':Git<CR>', { desc = '[G]it' })
+			vim.keymap.set('n', '<leader>gc', ':Git commit<CR>', { desc = '[G]it [C]ommit' })
+			vim.keymap.set('n', '<leader>gd', ':Git difftool<CR>', { desc = '[G]it [D]ifftool' })
+			vim.keymap.set('n', '<leader>gm', ':Git mergetool<CR>', { desc = '[G]it [M]ergetool' })
+		end,
+	},
 }

@@ -15,13 +15,13 @@ return {
 				html = { 'prettierd' },
 				json = { 'prettierd' },
 				yaml = { 'prettierd' },
-				-- markdown = { 'prettierd' },
+				markdown = {},
 				graphql = { 'prettierd' },
 				-- other languages
 				lua = { 'stylua' },
 				sh = { 'shfmt' },
-				['*'] = { 'codespell', 'trim_whitespace' }, -- for all filetypes
-				-- ['_'] = { '' }, -- for filetypes not listed
+				['*'] = { 'codespell' }, -- for all filetypes
+				['_'] = { 'trim_whitespace' }, -- for filetypes not listed
 			},
 			format_on_save = {
 				lsp_fallback = true,
