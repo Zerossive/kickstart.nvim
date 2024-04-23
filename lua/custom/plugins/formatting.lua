@@ -48,7 +48,14 @@ return {
 			},
 		},
 	},
-	{ 'tpope/vim-commentary' },
+	-- { 'tpope/vim-commentary' },
+	{
+		'numToStr/Comment.nvim',
+		opts = {
+			-- add any options here
+		},
+		lazy = false,
+	},
 	-- { 'tpope/vim-sleuth' }, -- Detect tabstop and shiftwidth automatically
 	{ 'JoosepAlviste/nvim-ts-context-commentstring' },
 	{ -- Autopairs
