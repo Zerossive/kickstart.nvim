@@ -61,6 +61,12 @@ return {
 			vim.keymap.set('n', '<leader>gc', ':Git commit<CR>', { desc = '[G]it [C]ommit' })
 			vim.keymap.set('n', '<leader>gd', ':Git difftool<CR>', { desc = '[G]it [D]ifftool' })
 			vim.keymap.set('n', '<leader>gm', ':Git mergetool<CR>', { desc = '[G]it [M]ergetool' })
+			vim.keymap.set(
+				'n',
+				'<leader>gl',
+				':Git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit<CR>',
+				{ desc = '[G]it [L]og' }
+			)
 		end,
 	},
 }
