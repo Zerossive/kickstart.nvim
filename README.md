@@ -1,5 +1,7 @@
 # kickstart.nvim
 
+Updated: 2025-02-27
+
 ## Introduction
 
 A starting point for Neovim that is:
@@ -41,8 +43,8 @@ Neovim's configurations are located under the following paths, depending on your
 | OS | PATH |
 | :- | :--- |
 | Linux, MacOS | `$XDG_CONFIG_HOME/nvim`, `~/.config/nvim` |
-| Windows (cmd)| `%userprofile%\AppData\Local\nvim\` |
-| Windows (powershell)| `$env:USERPROFILE\AppData\Local\nvim\` |
+| Windows (cmd)| `%localappdata%\nvim\` |
+| Windows (powershell)| `$env:LOCALAPPDATA\nvim\` |
 
 ### Install Kickstart
 
@@ -108,7 +110,7 @@ information about extending and exploring Neovim.
     `~/.local/share/nvim-kickstart`. You can apply this approach to any Neovim
     distribution that you would like to try out.
 * What if I want to "uninstall" this configuration:
-  * See [lazy.nvim uninstall](https://github.com/folke/lazy.nvim#-uninstalling) information
+  * See [lazy.nvim uninstall](https://lazy.folke.io/usage#-uninstalling) information
 
 ### Install Recipes
 
