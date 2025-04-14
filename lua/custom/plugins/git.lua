@@ -40,7 +40,7 @@ return {
 				map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
 				map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
 				map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
-				map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'git [u]ndo stage hunk' })
+				-- map('n', '<leader>hu', gitsigns.stage_hunk, { desc = 'git [u]ndo stage hunk' })
 				map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
 				map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
 				map('n', '<leader>hb', gitsigns.blame_line, { desc = 'git [b]lame line' })
@@ -49,23 +49,23 @@ return {
 					gitsigns.diffthis '@'
 				end, { desc = 'git [D]iff against last commit' })
 				-- Toggles
-				map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
-				map('n', '<leader>td', gitsigns.toggle_deleted, { desc = '[T]oggle git show [d]eleted' })
+				map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[t]oggle git show [b]lame line' })
+				map('n', '<leader>td', gitsigns.preview_hunk_inline, { desc = '[t]oggle git show [d]eleted' })
 			end,
 		},
 	},
 	{
 		'tpope/vim-fugitive',
 		config = function()
-			vim.keymap.set('n', '<leader>gg', ':Git<CR>', { desc = '[G]it' })
-			vim.keymap.set('n', '<leader>gc', ':Git commit<CR>', { desc = '[G]it [C]ommit' })
-			vim.keymap.set('n', '<leader>gd', ':Git difftool<CR>', { desc = '[G]it [D]ifftool' })
-			vim.keymap.set('n', '<leader>gm', ':Git mergetool<CR>', { desc = '[G]it [M]ergetool' })
+			vim.keymap.set('n', '<leader>gf', ':Git<CR>', { desc = '[g]it [f]ugitive' })
+			vim.keymap.set('n', '<leader>gc', ':Git commit<CR>', { desc = '[g]it [c]ommit' })
+			vim.keymap.set('n', '<leader>gd', ':Git difftool<CR>', { desc = '[g]it [d]ifftool' })
+			vim.keymap.set('n', '<leader>gm', ':Git mergetool<CR>', { desc = '[g]it [m]ergetool' })
 			vim.keymap.set(
 				'n',
 				'<leader>gl',
 				':Git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit<CR>',
-				{ desc = '[G]it [L]og' }
+				{ desc = '[g]it [l]og' }
 			)
 		end,
 	},

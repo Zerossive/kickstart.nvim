@@ -45,6 +45,10 @@ return {
 				template = 'Templates/Template Daily.md',
 			},
 			new_notes_location = 'notes_subdir',
+			note_path_func = function(spec)
+				local path = spec.dir / tostring(spec.title)
+				return path:with_suffix '.md'
+			end,
 			disable_frontmatter = true,
 			templates = {
 				subdir = 'Templates',
@@ -52,6 +56,56 @@ return {
 			attachments = {
 				img_folder = 'Files',
 			},
+			ui = {
+				enable = false,
+			},
+			---@param url string
+			follow_url_func = function(url)
+				-- Open the URL in the default web browser.
+				-- vim.fn.jobstart { 'open', url } -- Mac OS
+				vim.fn.jobstart { 'xdg-open', url } -- linux
+			end,
 		},
+	},
+	-- TODO: check if this plugin is working (if not replace it with a better one)
+	-- {
+	-- 	'uga-rosa/ccc.nvim',
+	-- 	config = function()
+	-- 		local ccc = require 'ccc'
+	-- 		ccc.setup {
+	-- 			default_color = '#40BFBF',
+	-- 			inputs = {
+	-- 				ccc.input.hsl,
+	-- 				ccc.input.rgb,
+	-- 			},
+	-- 			mappings = {
+	-- 				['?'] = function()
+	-- 					vim.cmd ':split | :help ccc-action'
+	-- 				end,
+	-- 			},
+	-- 		}
+	-- 		vim.keymap.set('n', '<leader>op', ':CccPick<CR>', { desc = '[o]pen color [p]icker' })
+	-- 	end,
+	-- },
+	{ -- Add surround support
+		'kylechui/nvim-surround',
+		version = '*', -- Use for stability; omit to use `main` branch for the latest features
+		event = 'VeryLazy',
+		opts = {},
+	},
+	{
+		'nvim-orgmode/orgmode',
+		event = 'VeryLazy',
+		ft = { 'org' },
+		config = function()
+			-- Setup orgmode
+			require('orgmode').setup {
+				org_agenda_files = '~/Elysium/orgfiles/**/*',
+				org_default_notes_file = '~/Elysium/orgfiles/refile.org',
+				org_agenda_span = 'day',
+				org_startup_folded = 'content',
+				org_deadline_warning_days = 3,
+			}
+		end,
 	},
 }

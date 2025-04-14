@@ -37,6 +37,10 @@ return {
 			-- Adds other completion capabilities.
 			'hrsh7th/cmp-nvim-lsp',
 			'hrsh7th/cmp-path',
+			-- 'hrsh7th/cmp-nvim-lsp-signature-help',
+			'hrsh7th/cmp-cmdline',
+			'hrsh7th/cmp-buffer',
+			{ 'roobert/tailwindcss-colorizer-cmp.nvim', opts = { color_square_width = 2 } },
 		},
 		config = function()
 			-- See `:help cmp`
@@ -45,6 +49,7 @@ return {
 			luasnip.config.setup {}
 
 			cmp.setup {
+				-- Enable luasnip to handle snippet expansion for nvim-cmp
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
@@ -64,8 +69,8 @@ return {
 					-- Accept ([y]es) the completion.
 					['<C-y>'] = cmp.mapping.confirm { select = true },
 
-					-- Manually trigger a completion from nvim-cmp.
-					-- ['<C-a>'] = cmp.mapping.complete {},
+					-- Manually trigger a completion from nvim-cmp. using spacebar
+					['<C-space>'] = cmp.mapping.complete {},
 
 					-- Think of <c-l> as moving to the right of your snippet expansion.
 					['<C-l>'] = cmp.mapping(function()
@@ -80,11 +85,45 @@ return {
 					end, { 'i', 's' }),
 				},
 				sources = {
+					{
+						name = 'lazydev',
+						-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
+						group_index = 0,
+					},
 					{ name = 'nvim_lsp' },
 					{ name = 'luasnip' },
 					{ name = 'path' },
+					-- { name = 'nvim_lsp_signature_help' },
+				},
+
+				-- override the default [formatting] capabilities for tailwindcss
+				formatting = {
+					format = require('tailwindcss-colorizer-cmp').formatter,
 				},
 			}
+
+			-- `/` cmdline setup. (enable buffer text completion when searching with `/`)
+			cmp.setup.cmdline('/', {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = 'buffer' },
+				},
+			})
+
+			-- `:` cmdline setup (enable path and command completion when typing commands with `:`)
+			cmp.setup.cmdline(':', {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = 'path' },
+				}, {
+					{
+						name = 'cmdline',
+						option = {
+							ignore_cmds = { 'Man', '!' },
+						},
+					},
+				}),
+			})
 		end,
 	},
 }
