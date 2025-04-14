@@ -1,6 +1,5 @@
 --[[
 =====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
 ========                                    .-----.          ========
 ========         .----------------------.   | === |          ========
@@ -20,8 +19,12 @@
 =====================================================================
 ]]
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- Custom commands
+require 'custom.commands.custom_commands'
+
+-- Disable netrw
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -37,20 +40,23 @@ vim.g.have_nerd_font = true
 
 -- Make line numbers default
 vim.opt.number = true
--- You can also add relative line numbers, for help with jumping.
+-- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
--- Don't show the mode, since it's already in status line
+-- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
 -- Sync clipboard between OS and Neovim.
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamedplus'
+vim.schedule(function()
+	vim.opt.clipboard = 'unnamedplus'
+end)
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -58,7 +64,7 @@ vim.opt.breakindent = true
 -- Save undo history
 vim.opt.undofile = true
 
--- Case-insensitive searching UNLESS \C or capital in search
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
@@ -68,19 +74,15 @@ vim.opt.signcolumn = 'yes'
 -- Decrease update time
 vim.opt.updatetime = 250
 
--- Decrease mapped sequence wait time
--- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
-
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- Sets how neovim will display certain whitespace in the editor.
+-- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- vim.opt.list = true -- handled by mini.basics
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' } -- handled by mini.basics but changed abit
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -89,7 +91,12 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 15
+vim.opt.scrolloff = 10
+
+-- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
+-- instead raise a dialog asking if you wish to save the current file(s)
+-- See `:help 'confirm'`
+vim.opt.confirm = true
 
 -- NOTE: Custom Options
 vim.opt.tabstop = 4
@@ -99,76 +106,61 @@ vim.opt.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpo
 vim.opt.conceallevel = 1
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+vim.opt.spelllang = 'en_us'
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = true
+-- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>cs', vim.diagnostic.open_float, { desc = '[S]how diagnostic Error messages' })
-vim.keymap.set('n', '<leader>cq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>cq', vim.diagnostic.setloclist, { desc = 'open diagnostic [q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- Keybinds to make split navigation easier.
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
 -- NOTE: Custom Keymaps
 --
 -- Normal mode
-vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Move up 1/2 page and center' })
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Move down 1/2 page and center' })
-vim.keymap.set('n', '<Leader>on', ':cd ~/.config/nvim | SessionRestore<CR>', { desc = '[O]pen [N]eovim Config' })
-vim.keymap.set('n', '<leader>oo', ':cd ~/Elysium/Obsidian\\ Vault/ | SessionRestore<CR>', { desc = '[O]pen [O]bsidian Vault' })
-vim.keymap.set('n', '<Leader>w', ':w<CR>', { desc = '[W]rite File' })
-vim.keymap.set('n', '<Leader>q', ':q<CR>', { desc = '[Q]uit File' })
-vim.keymap.set('n', '<leader>o.', ':cd %:p:h<CR>', { desc = '[O]pen [.] as Root Directory' })
-vim.keymap.set('n', '<leader>od', ':!dolphin ~/.local/share/nvim/sessions &<CR>', { desc = '[O]pen [D]irectory of Session Storage' })
-vim.keymap.set('n', '<leader><enter>', '<C-^>', { desc = '[Enter] Previous Buffer' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'move up 1/2 page and center' })
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'move down 1/2 page and center' })
+vim.keymap.set('n', '<Leader>on', ':cd ~/.config/nvim | SessionRestore<CR>', { desc = '[o]pen [n]eovim config' })
+vim.keymap.set('n', '<leader>oo', ':cd ~/Elysium/Obsidian\\ Vault/ | SessionRestore<CR>', { desc = '[o]pen [o]bsidian vault' })
+vim.keymap.set('n', '<leader>oq', ':e ~/Elysium/Obsidian\\ Vault/Quick\\ Note.md<CR>', { desc = '[o]pen [q]uick note' })
+vim.keymap.set('n', '<leader>om', ':cd /mnt/autofs/OLYMPUS/ | SessionRestore<CR>', { desc = '[o]pen [m]ounted OLYMPUS' })
+vim.keymap.set('n', '<Leader>w', ':w<CR>', { desc = '[w]rite file' })
+vim.keymap.set('n', '<Leader>a', ':qa<CR>', { desc = 'quit [a]ll' })
+vim.keymap.set('n', '<Leader>q', ':q<CR>', { desc = '[q]uit file' })
+vim.keymap.set('n', '<leader>o.', ':cd %:p:h<CR>', { desc = '[o]pen [.] as root directory' })
+vim.keymap.set('n', '<leader>od', ':!dolphin . &<CR>', { desc = '[o]pen [d]irectory' })
+vim.keymap.set('n', '<leader>ol', ':!dolphin ~/.local/share/nvim/sessions &<CR>', { desc = '[o]pen [l]ocal session storage' })
 vim.keymap.set('n', '<leader>cc', function()
 	local cursor_position = vim.api.nvim_win_get_cursor(0)
 	vim.cmd 'normal GVggy'
 	vim.api.nvim_win_set_cursor(0, cursor_position)
-end, { desc = '[C]opy All [C]ode' })
-vim.keymap.set('n', '<leader>cn', ':cnext<CR>', { desc = '[N]ext Quickfix' })
-vim.keymap.set('n', '<leader>cp', ':cprevious<CR>', { desc = '[P]revious Quickfix' })
+end, { desc = '[c]opy all [c]ode' })
+vim.keymap.set('n', '<leader>bo', ':BufOnly<CR>', { desc = 'close [o]ther buffers' })
 
 -- Insert mode
-vim.keymap.set('i', 'jj', '<Escape>', { desc = 'Normal Mode' })
-vim.keymap.set('i', '<C-BS>', '<Del>', { desc = 'Forward Delete' })
-vim.keymap.set('i', '<S-Tab>', '<C-d>', { desc = 'Tab Left' })
+vim.keymap.set('i', 'jj', '<Escape>', { desc = 'normal mode' })
+vim.keymap.set('i', '<C-e>', '<ESC>A', { desc = 'go to end of line' })
 
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
--- Highlight when yanking (copying) text
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-	desc = 'Highlight when yanking (copying) text',
-	group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
+-- Visual mode
+vim.keymap.set('v', '<C-r>', ':RC ', { desc = '[r]un command on selected text' })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-	vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+	local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+	if vim.v.shell_error ~= 0 then
+		error('Error cloning lazy.nvim:\n' .. out)
+	end
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
