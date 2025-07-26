@@ -98,14 +98,6 @@ return {
 			vim.keymap.set('n', '<leader>sl', ':Telescope luasnip<CR>', { desc = '[s]earch [l]uasnips' })
 		end,
 	},
-	-- {
-	-- 	'j-morano/buffer_manager.nvim',
-	-- 	config = function()
-	-- 		local bufferManager = require 'buffer_manager'
-	-- 		bufferManager.setup()
-	-- 		vim.keymap.set('n', '<leader>bl', ':lua require("buffer_manager.ui").toggle_quick_menu()<CR>', { desc = 'buffer [l]ist' })
-	-- 	end,
-	-- },
 	{
 		'folke/flash.nvim',
 		event = 'VeryLazy',

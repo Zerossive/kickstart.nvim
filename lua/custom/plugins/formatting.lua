@@ -20,7 +20,9 @@ return {
 				-- other languages
 				lua = { 'stylua' },
 				sh = { 'shfmt' },
-				['*'] = { 'codespell' }, -- for all filetypes
+				-- rust = { 'rustfmt' },
+				rust = { 'custom_rustfmt' }, -- use pre-installed rustfmt with rustup
+				-- ['*'] = { 'codespell' }, -- for all filetypes
 				['_'] = { 'trim_whitespace' }, -- for filetypes not listed
 			},
 			notify_on_error = false,
@@ -42,13 +44,32 @@ return {
 			end,
 			formatters = {
 				prettierd = {
-					prepend_args = { '--tab-width=4', '--use-tabs', '--no-semi', '--single-quote', '--jsx-single-quote' },
+					prepend_args = {
+						'--tab-width=4',
+						'--use-tabs',
+						'--no-semi',
+						'--single-quote',
+						'--jsx-single-quote',
+						'--trailing-comma=all',
+						'--html-whitespace-sensitivity=ignore',
+					},
 				},
 				prettier = {
-					prepend_args = { '--tab-width=4', '--use-tabs', '--no-semi', '--single-quote', '--jsx-single-quote' },
+					prepend_args = {
+						'--tab-width=4',
+						'--use-tabs',
+						'--no-semi',
+						'--single-quote',
+						'--jsx-single-quote',
+						'--trailing-comma=all',
+						'--html-whitespace-sensitivity=ignore',
+					},
 				},
 				stylua = {
 					prepend_args = { '--indent-type=Tabs', '--indent-width=4' },
+				},
+				custom_rustfmt = {
+					command = 'rustfmt',
 				},
 			},
 		},
@@ -58,8 +79,7 @@ return {
 				function()
 					require('conform').format { async = true, lsp_format = 'fallback' }
 				end,
-				mode = '',
-				desc = '[C]ode [F]ormat',
+				desc = '[c]ode [f]ormat',
 			},
 		},
 	},
@@ -68,28 +88,20 @@ return {
 		opts = {},
 		lazy = false,
 	},
-	-- { 'tpope/vim-sleuth' }, -- Detect tabstop and shiftwidth automatically
 	{ 'nmac427/guess-indent.nvim', opts = {} }, -- Detect tabstop and shiftwidth automatically
-	-- { -- Autopairs
-	-- 	'windwp/nvim-autopairs',
-	-- 	event = 'InsertEnter',
-	-- 	-- Optional dependency
-	-- 	dependencies = { 'hrsh7th/nvim-cmp' },
-	-- 	config = function()
-	-- 		require('nvim-autopairs').setup {}
-	-- 		-- If you want to automatically add `(` after selecting a function or method
-	-- 		local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-	-- 		local cmp = require 'cmp'
-	-- 		cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-	-- 	end,
-	-- },
-	-- { -- Add indentation guides even on blank lines
-	-- 	'lukas-reineke/indent-blankline.nvim',
-	-- 	-- Enable `lukas-reineke/indent-blankline.nvim`
-	-- 	-- See `:help ibl`
-	-- 	main = 'ibl',
-	-- 	opts = {},
-	-- },
+	{ -- Autopairs
+		'windwp/nvim-autopairs',
+		event = 'InsertEnter',
+		-- Optional dependency
+		dependencies = { 'hrsh7th/nvim-cmp' },
+		config = function()
+			require('nvim-autopairs').setup {}
+			-- If you want to automatically add `(` after selecting a function or method
+			local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+			local cmp = require 'cmp'
+			cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+		end,
+	},
 	{
 		'bullets-vim/bullets.vim',
 		ft = 'markdown',
@@ -98,11 +110,33 @@ return {
 		end,
 	},
 	{
-		'laytan/tailwind-sorter.nvim',
-		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-lua/plenary.nvim' },
-		build = 'cd formatter && npm ci && npm run build',
-		opts = {
-			on_save_enabled = true,
+		'luckasRanarison/tailwind-tools.nvim',
+		name = 'tailwind-tools',
+		build = ':UpdateRemotePlugins',
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter',
+			'nvim-telescope/telescope.nvim', -- optional
+			'neovim/nvim-lspconfig', -- optional
 		},
+		opts = {}, -- your configuration
+		keys = {
+			{ '<leader>tt', '<cmd>TailwindConcealToggle<cr>', desc = '[t]oggle [t]ailwind conceal' },
+		},
+		config = function(_, opts)
+			require('tailwind-tools').setup { opts }
+
+			-- run :TailwindSort on save when tailwindcss-language-server is active
+			vim.api.nvim_create_autocmd('BufWritePre', {
+				callback = function()
+					local bufnr = vim.api.nvim_get_current_buf()
+					for _, client in ipairs(vim.lsp.get_clients { bufnr = bufnr }) do
+						if client.name == 'tailwindcss' then
+							pcall(vim.cmd, 'TailwindSort')
+							break
+						end
+					end
+				end,
+			})
+		end,
 	},
 }

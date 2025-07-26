@@ -185,8 +185,11 @@ return {
 				-- 'codespell',
 				'yaml-language-server',
 				'rust-analyzer',
+				-- 'rustfmt',
 				-- 'ts_ls',
 				'marksman',
+				'docker-compose-language-service',
+				'svelte-language-server',
 			})
 			require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

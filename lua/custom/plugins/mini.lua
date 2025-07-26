@@ -201,6 +201,6 @@ return { -- Collection of various small independent plugins/modules
 
 		-- [[ Mini Pairs ]]
 		-- Auto-closing paired characters
-		require('mini.pairs').setup()
+		-- require('mini.pairs').setup()
 	end,
 }

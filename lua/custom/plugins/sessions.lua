@@ -27,21 +27,19 @@ return {
 	},
 	{
 		'rmagatti/auto-session',
-		config = function()
-			require('auto-session').setup {
-				log_level = vim.log.levels.ERROR,
-				-- auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
-				-- auto_session_allowed_dirs = { '~/Elysium/Projects/*', '~/.config/nvim', '~/Elysium/Obsidian Vault/' }, -- OUTDATED?
-				allowed_dirs = { '~/Elysium/Projects/*', '~/.config/nvim', '~/Elysium/Obsidian Vault/' },
-				-- auto_session_enable_last_session = true,
-				-- pre_save_cmds = { 'Neotree close' }, -- close filetree before saving to prevent errors
-			}
-
+		lazy = false,
+		opts = {
+			log_level = vim.log.levels.ERROR,
+			allowed_dirs = { '~/Elysium/Projects/*', '~/Elysium/Projects/*/*', '~/.config/nvim', '~/Elysium/Obsidian Vault/' },
+		},
+		keys = {
+			{ '<leader>os', '<cmd>SessionRestore<cr>', desc = '[o]pen [s]ession of current directory' },
+			{ '<leader>or', '<cmd>RecentSession<cr>', desc = '[o]pen [r]ecent session' },
+			{ '<leader>ss', '<cmd>Telescope session-lens<cr>', desc = '[s]earch [s]essions' },
+		},
+		config = function(_, opts)
+			require('auto-session').setup(opts)
 			require('telescope').load_extension 'session-lens'
-
-			vim.keymap.set('n', '<leader>os', ':SessionRestore<CR>', { desc = '[o]pen [s]ession of current directory' })
-			vim.keymap.set('n', '<leader>ss', ':Telescope session-lens<CR>', { desc = '[s]earch [s]essions' })
-			vim.keymap.set('n', '<leader>or', ':RecentSession<CR>', { desc = '[o]pen [r]ecent session' }) -- custom command
 		end,
 	},
 }

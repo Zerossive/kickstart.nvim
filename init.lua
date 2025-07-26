@@ -128,13 +128,13 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- Normal mode
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'move up 1/2 page and center' })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'move down 1/2 page and center' })
-vim.keymap.set('n', '<Leader>on', ':cd ~/.config/nvim | SessionRestore<CR>', { desc = '[o]pen [n]eovim config' })
+vim.keymap.set('n', '<leader>on', ':cd ~/.config/nvim | SessionRestore<CR>', { desc = '[o]pen [n]eovim config' })
 vim.keymap.set('n', '<leader>oo', ':cd ~/Elysium/Obsidian\\ Vault/ | SessionRestore<CR>', { desc = '[o]pen [o]bsidian vault' })
 vim.keymap.set('n', '<leader>oq', ':e ~/Elysium/Obsidian\\ Vault/Quick\\ Note.md<CR>', { desc = '[o]pen [q]uick note' })
 vim.keymap.set('n', '<leader>om', ':cd /mnt/autofs/OLYMPUS/ | SessionRestore<CR>', { desc = '[o]pen [m]ounted OLYMPUS' })
-vim.keymap.set('n', '<Leader>w', ':w<CR>', { desc = '[w]rite file' })
-vim.keymap.set('n', '<Leader>a', ':qa<CR>', { desc = 'quit [a]ll' })
-vim.keymap.set('n', '<Leader>q', ':q<CR>', { desc = '[q]uit file' })
+vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = '[w]rite file' })
+vim.keymap.set('n', '<leader>a', ':qa<CR>', { desc = 'quit [a]ll' })
+vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = '[q]uit file' })
 vim.keymap.set('n', '<leader>o.', ':cd %:p:h<CR>', { desc = '[o]pen [.] as root directory' })
 vim.keymap.set('n', '<leader>od', ':!dolphin . &<CR>', { desc = '[o]pen [d]irectory' })
 vim.keymap.set('n', '<leader>ol', ':!dolphin ~/.local/share/nvim/sessions &<CR>', { desc = '[o]pen [l]ocal session storage' })
@@ -144,10 +144,12 @@ vim.keymap.set('n', '<leader>cc', function()
 	vim.api.nvim_win_set_cursor(0, cursor_position)
 end, { desc = '[c]opy all [c]ode' })
 vim.keymap.set('n', '<leader>bo', ':BufOnly<CR>', { desc = 'close [o]ther buffers' })
+vim.keymap.set('n', '<C-8>', 'viW*Ncgn', { desc = 'replace current word' })
 
 -- Insert mode
 vim.keymap.set('i', 'jj', '<Escape>', { desc = 'normal mode' })
 vim.keymap.set('i', '<C-e>', '<ESC>A', { desc = 'go to end of line' })
+vim.keymap.set('i', '<C-8>', 'viW*Ncgn', { desc = 'replace current word' })
 
 -- Visual mode
 vim.keymap.set('v', '<C-r>', ':RC ', { desc = '[r]un command on selected text' })

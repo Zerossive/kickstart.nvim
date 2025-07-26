@@ -44,21 +44,6 @@ vim.api.nvim_create_user_command('RecentSession', function()
 	vim.cmd('source ' .. recent_file)
 end, { desc = 'Open most recent session' })
 
--- Open Oil with preview
-vim.api.nvim_create_user_command('OilPreview', function()
-	local oil_open = false
-	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-		if vim.api.nvim_buf_get_name(buf):match '^oil://' then
-			oil_open = true
-			break
-		end
-	end
-	if not oil_open then
-		vim.cmd 'Oil'
-	end
-	vim.cmd 'lua require("oil.util").run_after_load(0, function() require("oil").open_preview() end)'
-end, { desc = 'Open Oil with preview' })
-
 -- Open the daily note
 vim.api.nvim_create_user_command('DailyNote', function()
 	-- Function to expand a particular snippet by name

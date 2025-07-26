@@ -67,26 +67,25 @@ return {
 			end,
 		},
 	},
-	-- TODO: check if this plugin is working (if not replace it with a better one)
-	-- {
-	-- 	'uga-rosa/ccc.nvim',
-	-- 	config = function()
-	-- 		local ccc = require 'ccc'
-	-- 		ccc.setup {
-	-- 			default_color = '#40BFBF',
-	-- 			inputs = {
-	-- 				ccc.input.hsl,
-	-- 				ccc.input.rgb,
-	-- 			},
-	-- 			mappings = {
-	-- 				['?'] = function()
-	-- 					vim.cmd ':split | :help ccc-action'
-	-- 				end,
-	-- 			},
-	-- 		}
-	-- 		vim.keymap.set('n', '<leader>op', ':CccPick<CR>', { desc = '[o]pen color [p]icker' })
-	-- 	end,
-	-- },
+	{
+		'uga-rosa/ccc.nvim',
+		config = function()
+			local ccc = require 'ccc'
+			ccc.setup {
+				default_color = '#40BFBF',
+				inputs = {
+					ccc.input.hsl,
+					ccc.input.rgb,
+				},
+				mappings = {
+					['?'] = function()
+						vim.cmd ':split | :help ccc-action'
+					end,
+				},
+			}
+			vim.keymap.set('n', '<leader>op', ':CccPick<CR>', { desc = '[o]pen color [p]icker' })
+		end,
+	},
 	{ -- Add surround support
 		'kylechui/nvim-surround',
 		version = '*', -- Use for stability; omit to use `main` branch for the latest features
@@ -108,4 +107,27 @@ return {
 			}
 		end,
 	},
+	{
+		'nguyenvukhang/nvim-toggler',
+		loading = 'lazy',
+		opts = {
+			inverses = {
+				['dark'] = 'light',
+				['!=='] = '===',
+				['[ ]'] = '[x]',
+			},
+			remove_default_keybinds = true,
+			autoselect_longest_match = true,
+		},
+		keys = {
+			{
+				'<leader>ci',
+				function()
+					require('nvim-toggler').toggle()
+				end,
+				desc = '[c]ode [i]nvert',
+			},
+		},
+	},
+	{ 'tpope/vim-eunuch' },
 }

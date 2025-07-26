@@ -2,58 +2,6 @@
 
 return {
 	{
-		'stevearc/oil.nvim',
-		-- dependencies = { 'nvim-tree/nvim-web-devicons' },
-		config = function(_, opts)
-			require('oil').setup(opts)
-			vim.keymap.set('n', '<leader>of', ':OilPreview<CR>', { desc = '[o]pen [f]ile explorer' })
-			-- vim.api.nvim_set_hl(0, 'OilDir', { fg = '#1e1e2e', bg = '#74c7ec' })
-		end,
-		opts = {
-			-- experimental_watch_for_changes = true,
-			default_file_explorer = true,
-			delete_to_trash = true,
-			skip_confirm_for_simple_edits = true,
-			keymaps = {
-				['g?'] = 'actions.show_help',
-				['<CR>'] = 'actions.select',
-				['l'] = 'actions.select',
-				['<C-v>'] = 'actions.select_vsplit',
-				['<C-x>'] = 'actions.select_split',
-				['<C-t>'] = 'actions.select_tab',
-				['<C-p>'] = 'actions.preview',
-				-- ['<C-c>'] = 'actions.close',
-				['q'] = 'actions.close',
-				-- ['<C-l>'] = 'actions.refresh',
-				-- ['-'] = 'actions.parent',
-				['h'] = 'actions.parent',
-				['<BS>'] = 'actions.open_cwd',
-				['`'] = 'actions.cd',
-				['~'] = 'actions.tcd',
-				['gs'] = 'actions.change_sort',
-				['gx'] = 'actions.open_external',
-				['g.'] = 'actions.toggle_hidden',
-				['g\\'] = 'actions.toggle_trash',
-				['gy'] = 'actions.copy_entry_path',
-				['='] = 'actions.refresh',
-				-- ['<CR>'] = 'actions.open_terminal',
-			},
-			use_default_keymaps = false,
-			view_options = {
-				show_hidden = true,
-				natural_order = true,
-				is_always_hidden = function(name, bufnr)
-					return name == '..' or name == '.git' -- hides ../ ang .git/ directories when hidden files are shown
-				end,
-			},
-			columns = {
-				-- 	{ 'size', highlight = 'Special' },
-				-- 	{ 'birthtime', highlight = 'OilSocket' },
-				{ 'icon', add_padding = false },
-			},
-		},
-	},
-	{
 		'mikavilpas/yazi.nvim',
 		event = 'VeryLazy',
 		keys = {

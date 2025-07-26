@@ -7,7 +7,7 @@ return {
 		opts = {
 			notifier = { enabled = true },
 			terminal = { enabled = true },
-			image = { enable = true },
+			image = { enable = true, doc = { float = false } },
 			picker = { enable = true },
 		},
 		keys = {
@@ -157,6 +157,13 @@ return {
 				end,
 				desc = '[f]ind [r]esume',
 			},
+			{
+				'<leader>fu',
+				function()
+					Snacks.picker.undo()
+				end,
+				desc = '[f]ind [u]ndo tree',
+			},
 			-- LSP
 			{
 				'gd',
@@ -242,6 +249,15 @@ return {
 					Snacks.lazygit()
 				end,
 				desc = 'lazy [g]it',
+			},
+
+			-- [[ Image ]]
+			{
+				'<leader>oi',
+				function()
+					Snacks.image.hover()
+				end,
+				desc = '[o]pen [i]mage',
 			},
 		},
 	},

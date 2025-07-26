@@ -167,51 +167,7 @@ return {
 					inc_rename = false, -- enables an input dialog for inc-rename.nvim
 					lsp_doc_border = true, -- add a border to hover docs and signature help
 				},
-
-				-- commands = {
-				-- 	last = {
-				-- 		opts = {
-				-- 			format = {
-				-- 				'{level} ',
-				-- 				'{date} ',
-				-- 				'{event}',
-				-- 				{ '{kind}', before = { '.', hl_group = 'NoiceFormatKind' } },
-				-- 				' ',
-				-- 				'{title} ',
-				-- 				'{cmdline} ',
-				-- 				'\n',
-				-- 				'{message}',
-				-- 			},
-				-- 		},
-				-- 	},
-				-- },
-				--
-				-- views = {
-				-- 	cmdline_output = {
-				-- 		enter = true,
-				-- 		format = {
-				-- 			'{level} ',
-				-- 			'{date} ',
-				-- 			'{event}',
-				-- 			{ '{kind}', before = { '.', hl_group = 'NoiceFormatKind' } },
-				-- 			' ',
-				-- 			'{title} ',
-				-- 			'{cmdline} ',
-				-- 			'\n',
-				-- 			'{message}',
-				-- 		},
-				-- 		view = 'split',
-				-- 	},
-				-- },
 			}
-			-- require('telescope').load_extension 'noice'
-			--
-			-- vim.keymap.set('n', '<leader>nc', '<cmd>Noice dismiss<CR>', { desc = '[c]lear messages' })
-			-- vim.keymap.set('n', '<leader>ns', '<cmd>Noice telescope<CR>', { desc = '[s]earch messages' })
-			-- vim.keymap.set('n', '<leader>nl', '<cmd>Noice last<CR>', { desc = '[l]ast message' })
-			-- vim.keymap.set('n', '<leader>ne', '<cmd>Noice enable<CR>', { desc = '[e]nable noice' })
-			-- vim.keymap.set('n', '<leader>nd', '<cmd>Noice disable<CR>', { desc = '[d]isable noice' })
-			-- vim.keymap.set('n', '<leader>na', '<cmd>Noice all<CR>', { desc = 'list [a]all messages' })
 		end,
 	},
 	{
@@ -224,9 +180,7 @@ return {
 			},
 			user_default_options = {
 				css = true,
-				tailwind = 'lsp',
-				-- virtualtext_inline = true,
-				-- mode = 'virtualtext',
+				tailwind = 'both',
 			},
 		},
 		config = function(_, opts)
@@ -274,12 +228,11 @@ return {
 		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
 	},
 	{
-		'iamcco/markdown-preview.nvim',
-		cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
-		build = 'cd app && npm install && git restore .',
-		init = function()
-			vim.g.mkdp_filetypes = { 'markdown' }
-		end,
-		ft = { 'markdown' },
+		'code-biscuits/nvim-biscuits',
+		opts = {
+			toggle_keybind = '<leader>tB',
+			show_on_start = true,
+			cursor_line_only = true,
+		},
 	},
 }
