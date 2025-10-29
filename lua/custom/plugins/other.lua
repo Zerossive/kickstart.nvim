@@ -72,16 +72,25 @@ return {
 		config = function()
 			local ccc = require 'ccc'
 			ccc.setup {
-				default_color = '#40BFBF',
+				default_color = '#008df8',
 				inputs = {
+					ccc.input.oklch,
 					ccc.input.hsl,
 					ccc.input.rgb,
+				},
+				outputs = {
+					ccc.output.hex,
+					ccc.output.hex_short,
+					ccc.output.css_rgb,
+					ccc.output.css_hsl,
+					ccc.output.css_oklch,
 				},
 				mappings = {
 					['?'] = function()
 						vim.cmd ':split | :help ccc-action'
 					end,
 				},
+				save_on_quit = true,
 			}
 			vim.keymap.set('n', '<leader>op', ':CccPick<CR>', { desc = '[o]pen color [p]icker' })
 		end,
