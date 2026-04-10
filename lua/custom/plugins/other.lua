@@ -1,21 +1,33 @@
 return {
-	{
-		'alexghergh/nvim-tmux-navigation',
-		config = function()
-			local nvim_tmux_nav = require 'nvim-tmux-navigation'
-
-			nvim_tmux_nav.setup {
-				disable_when_zoomed = true, -- defaults to false
-			}
-
-			vim.keymap.set('n', '<C-h>', nvim_tmux_nav.NvimTmuxNavigateLeft)
-			vim.keymap.set('n', '<C-j>', nvim_tmux_nav.NvimTmuxNavigateDown)
-			vim.keymap.set('n', '<C-k>', nvim_tmux_nav.NvimTmuxNavigateUp)
-			vim.keymap.set('n', '<C-l>', nvim_tmux_nav.NvimTmuxNavigateRight)
-			-- vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
-			-- vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
-		end,
-	},
+	-- {
+	-- 	'alexghergh/nvim-tmux-navigation',
+	-- 	config = function()
+	-- 		local nvim_tmux_nav = require 'nvim-tmux-navigation'
+	--
+	-- 		nvim_tmux_nav.setup {
+	-- 			disable_when_zoomed = true, -- defaults to false
+	-- 		}
+	--
+	-- 		vim.keymap.set('n', '<C-h>', nvim_tmux_nav.NvimTmuxNavigateLeft)
+	-- 		vim.keymap.set('n', '<C-j>', nvim_tmux_nav.NvimTmuxNavigateDown)
+	-- 		vim.keymap.set('n', '<C-k>', nvim_tmux_nav.NvimTmuxNavigateUp)
+	-- 		vim.keymap.set('n', '<C-l>', nvim_tmux_nav.NvimTmuxNavigateRight)
+	-- 		-- vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+	-- 		-- vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+	-- 	end,
+	-- },
+	-- {
+	-- 	'swaits/zellij-nav.nvim',
+	-- 	lazy = true,
+	-- 	event = 'VeryLazy',
+	-- 	keys = {
+	-- 		{ '<c-h>', '<cmd>ZellijNavigateLeftTab<cr>', { silent = true, desc = 'navigate left or tab' } },
+	-- 		{ '<c-j>', '<cmd>ZellijNavigateDown<cr>', { silent = true, desc = 'navigate down' } },
+	-- 		{ '<c-k>', '<cmd>ZellijNavigateUp<cr>', { silent = true, desc = 'navigate up' } },
+	-- 		{ '<c-l>', '<cmd>ZellijNavigateRightTab<cr>', { silent = true, desc = 'navigate right or tab' } },
+	-- 	},
+	-- 	opts = {},
+	-- },
 	{
 		'epwalsh/obsidian.nvim',
 		version = '*', -- recommended, use latest release instead of latest commit
@@ -101,21 +113,21 @@ return {
 		event = 'VeryLazy',
 		opts = {},
 	},
-	{
-		'nvim-orgmode/orgmode',
-		event = 'VeryLazy',
-		ft = { 'org' },
-		config = function()
-			-- Setup orgmode
-			require('orgmode').setup {
-				org_agenda_files = '~/Elysium/orgfiles/**/*',
-				org_default_notes_file = '~/Elysium/orgfiles/refile.org',
-				org_agenda_span = 'day',
-				org_startup_folded = 'content',
-				org_deadline_warning_days = 3,
-			}
-		end,
-	},
+	-- {
+	-- 	'nvim-orgmode/orgmode',
+	-- 	event = 'VeryLazy',
+	-- 	ft = { 'org' },
+	-- 	config = function()
+	-- 		-- Setup orgmode
+	-- 		require('orgmode').setup {
+	-- 			org_agenda_files = '~/Elysium/orgfiles/**/*',
+	-- 			org_default_notes_file = '~/Elysium/orgfiles/refile.org',
+	-- 			org_agenda_span = 'day',
+	-- 			org_startup_folded = 'content',
+	-- 			org_deadline_warning_days = 3,
+	-- 		}
+	-- 	end,
+	-- },
 	{
 		'nguyenvukhang/nvim-toggler',
 		loading = 'lazy',
@@ -139,4 +151,10 @@ return {
 		},
 	},
 	{ 'tpope/vim-eunuch' },
+	{
+		'chomosuke/typst-preview.nvim',
+		ft = 'typst',
+		version = '1.*',
+		opts = {}, -- lazy.nvim will implicitly calls `setup {}`
+	},
 }

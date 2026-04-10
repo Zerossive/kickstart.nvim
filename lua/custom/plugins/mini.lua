@@ -190,10 +190,6 @@ return { -- Collection of various small independent plugins/modules
 		-- go forwards/backward with square brackets
 		require('mini.bracketed').setup()
 
-		-- [[ Mini Splitjoin ]]
-		-- Split and join arguments using gS
-		require('mini.splitjoin').setup()
-
 		-- [[ Mini Icons ]]
 		-- Icon provider
 		require('mini.icons').setup()

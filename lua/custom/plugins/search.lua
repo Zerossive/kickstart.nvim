@@ -111,14 +111,6 @@ return {
 				end,
 				desc = 'flash [s]earch',
 			},
-			{
-				'S',
-				mode = { 'n', 'x', 'o' },
-				function()
-					require('flash').treesitter()
-				end,
-				desc = 'flash treesitter [S]earch',
-			},
 		},
 	},
 	{

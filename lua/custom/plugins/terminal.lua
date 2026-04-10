@@ -6,4 +6,7 @@ return {
 		direction = 'float',
 		float_opts = { border = 'curved' },
 	},
+	keys = {
+		{ '<m-\\>', '<cmd>vsplit | vertical resize 60 | terminal<cr>' },
+	},
 }

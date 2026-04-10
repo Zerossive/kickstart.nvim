@@ -6,7 +6,6 @@ return {
 		---@type snacks.Config
 		opts = {
 			notifier = { enabled = true },
-			terminal = { enabled = true },
 			image = { enable = true, doc = { float = false } },
 			picker = { enable = true },
 		},
@@ -200,16 +199,6 @@ return {
 					Snacks.picker.lsp_type_definitions()
 				end,
 				desc = '[g]oto t[y]pe definition',
-			},
-
-			--  [[ Terminal ]]
-			{
-				'<A-\\>',
-				function()
-					Snacks.terminal.toggle()
-				end,
-				mode = { 'n', 'i', 't' },
-				desc = 'snacks terminal',
 			},
 
 			-- [[ Notifier ]]

@@ -182,14 +182,12 @@ return {
 				'bash-language-server',
 				'shfmt',
 				'shellcheck',
-				-- 'codespell',
 				'yaml-language-server',
 				'rust-analyzer',
-				-- 'rustfmt',
-				-- 'ts_ls',
-				'marksman',
+				'marksman', -- markdown
 				'docker-compose-language-service',
 				'svelte-language-server',
+				'tinymist', -- typst
 			})
 			require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
