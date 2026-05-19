@@ -6,25 +6,20 @@ return {
 		---@type snacks.Config
 		opts = {
 			notifier = { enabled = true },
-			image = { enable = true, doc = { float = false } },
+			image = { enable = true },
 			picker = { enable = true },
+			scroll = { enable = true, animate_repeat = { delay = 1000 } },
+			gh = { enable = true },
+			input = { enable = true },
 		},
 		keys = {
 			--  [[ Pickers ]]
-			-- Top Pickers & Explorer
 			{
 				'<leader>fs',
 				function()
 					Snacks.picker.smart()
 				end,
 				desc = '[f]ind files [s]mart',
-			},
-			{
-				'<leader>fe',
-				function()
-					Snacks.explorer()
-				end,
-				desc = '[f]ile [e]xplorer',
 			},
 			{
 				'<leader>ft',
@@ -41,13 +36,6 @@ return {
 				desc = '[f]ind [r]esume',
 			},
 			-- find
-			{
-				'<leader>fbf',
-				function()
-					Snacks.picker.buffers()
-				end,
-				desc = '[f]ind open [b]uffer [f]iles',
-			},
 			{
 				'<leader>fc',
 				function()
@@ -76,21 +64,6 @@ return {
 				end,
 				desc = '[f]ind [o]ld files',
 			},
-			-- Grep
-			{
-				'<leader>f/',
-				function()
-					Snacks.picker.lines()
-				end,
-				desc = '[f]ind in buffer [/]',
-			},
-			{
-				'<leader>fbg',
-				function()
-					Snacks.picker.grep_buffers()
-				end,
-				desc = '[f]ind in open [b]uffers by [g]rep',
-			},
 			{
 				'<leader>fg',
 				function()
@@ -106,20 +79,19 @@ return {
 				desc = '[f]ind current [w]ord',
 				mode = { 'n', 'x' },
 			},
-			-- search
+			{
+				'<leader>fn',
+				function()
+					Snacks.picker.notifications()
+				end,
+				desc = '[f]ind [n]otifications',
+			},
 			{
 				'<leader>fd',
 				function()
 					Snacks.picker.diagnostics()
 				end,
 				desc = '[f]ind [d]iagnostics',
-			},
-			{
-				'<leader>fbd',
-				function()
-					Snacks.picker.diagnostics_buffer()
-				end,
-				desc = '[f]ind open [b]uffer [d]iagnostics',
 			},
 			{
 				'<leader>fh',
@@ -150,18 +122,40 @@ return {
 				desc = '[f]ind [q]uickfix',
 			},
 			{
-				'<leader>fr',
-				function()
-					Snacks.picker.resume()
-				end,
-				desc = '[f]ind [r]esume',
-			},
-			{
 				'<leader>fu',
 				function()
 					Snacks.picker.undo()
 				end,
 				desc = '[f]ind [u]ndo tree',
+			},
+			-- Buffer
+			{
+				'<leader>fbf',
+				function()
+					Snacks.picker.buffers()
+				end,
+				desc = '[f]ind open [b]uffer [f]iles',
+			},
+			{
+				'<leader>f/',
+				function()
+					Snacks.picker.lines()
+				end,
+				desc = '[f]ind in buffer [/]',
+			},
+			{
+				'<leader>fbg',
+				function()
+					Snacks.picker.grep_buffers()
+				end,
+				desc = '[f]ind in open [b]uffers by [g]rep',
+			},
+			{
+				'<leader>fbd',
+				function()
+					Snacks.picker.diagnostics_buffer()
+				end,
+				desc = '[f]ind open [b]uffer [d]iagnostics',
 			},
 			-- LSP
 			{
@@ -216,28 +210,30 @@ return {
 				end,
 				desc = '[n]otifier [l]ist',
 			},
-			{
-				'<leader>nf',
-				function()
-					Snacks.picker.notifications()
-				end,
-				desc = '[n]otifier [f]ind',
-			},
-			{
-				'<leader>fn',
-				function()
-					Snacks.picker.notifications()
-				end,
-				desc = '[f]ind [n]otifications',
-			},
 
 			-- [[ Lazygit ]]
 			{
-				'<leader>gg',
+				'<leader>gl',
 				function()
 					Snacks.lazygit()
 				end,
-				desc = 'lazy [g]it',
+				desc = '[l]azy git',
+			},
+
+			-- [[ GitHub ]]
+			{
+				'<leader>gi',
+				function()
+					Snacks.picker.gh_issue()
+				end,
+				desc = '[g]ithub [i]ssues',
+			},
+			{
+				'<leader>gI',
+				function()
+					Snacks.picker.gh_issue { state = 'all' }
+				end,
+				desc = '[g]ithub [i]ssues (all)',
 			},
 
 			-- [[ Image ]]

@@ -16,7 +16,7 @@ return {
 					if vim.wo.diff then
 						vim.cmd.normal { ']c', bang = true }
 					else
-						gitsigns.next_hunk()
+						gitsigns.nav_hunk 'next'
 					end
 				end, { desc = 'Jump to next git [c]hange' })
 
@@ -24,7 +24,7 @@ return {
 					if vim.wo.diff then
 						vim.cmd.normal { '[c', bang = true }
 					else
-						gitsigns.prev_hunk()
+						gitsigns.nav_hunk 'prev'
 					end
 				end, { desc = 'Jump to previous git [c]hange' })
 
@@ -54,19 +54,19 @@ return {
 			end,
 		},
 	},
-	{
-		'tpope/vim-fugitive',
-		config = function()
-			vim.keymap.set('n', '<leader>gf', ':Git<CR>', { desc = '[g]it [f]ugitive' })
-			vim.keymap.set('n', '<leader>gc', ':Git commit<CR>', { desc = '[g]it [c]ommit' })
-			vim.keymap.set('n', '<leader>gd', ':Git difftool<CR>', { desc = '[g]it [d]ifftool' })
-			vim.keymap.set('n', '<leader>gm', ':Git mergetool<CR>', { desc = '[g]it [m]ergetool' })
-			vim.keymap.set(
-				'n',
-				'<leader>gl',
-				':Git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit<CR>',
-				{ desc = '[g]it [l]og' }
-			)
-		end,
-	},
+	-- {
+	-- 	'tpope/vim-fugitive',
+	-- 	config = function()
+	-- 		vim.keymap.set('n', '<leader>gf', ':Git<CR>', { desc = '[g]it [f]ugitive' })
+	-- 		vim.keymap.set('n', '<leader>gc', ':Git commit<CR>', { desc = '[g]it [c]ommit' })
+	-- 		vim.keymap.set('n', '<leader>gd', ':Git difftool<CR>', { desc = '[g]it [d]ifftool' })
+	-- 		vim.keymap.set('n', '<leader>gm', ':Git mergetool<CR>', { desc = '[g]it [m]ergetool' })
+	-- 		vim.keymap.set(
+	-- 			'n',
+	-- 			'<leader>gl',
+	-- 			':Git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit<CR>',
+	-- 			{ desc = '[g]it [l]og' }
+	-- 		)
+	-- 	end,
+	-- },
 }

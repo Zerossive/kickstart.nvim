@@ -51,26 +51,31 @@ return {
 	{
 		'folke/sidekick.nvim',
 		opts = {
+			nes = { enabled = false },
 			-- add any options here
 			cli = {
 				mux = {
 					backend = 'zellij',
 					enabled = true,
 				},
+				win = { keys = { prompt = { '<a-p>', 'prompt', mode = 't', desc = 'insert prompt or context' } } },
+				-- prompts = {
+				-- 	test = 'explain the line of code at {position}',
+				-- },
 			},
 		},
 		keys = {
-			{
-				'<tab>',
-				function()
-					-- if there is a next edit, jump to it, otherwise apply it if any
-					if not require('sidekick').nes_jump_or_apply() then
-						return '<Tab>' -- fallback to normal tab
-					end
-				end,
-				expr = true,
-				desc = 'Goto/Apply Next Edit Suggestion',
-			},
+			-- {
+			-- 	'<tab>',
+			-- 	function()
+			-- 		-- if there is a next edit, jump to it, otherwise apply it if any
+			-- 		if not require('sidekick').nes_jump_or_apply() then
+			-- 			return '<Tab>' -- fallback to normal tab
+			-- 		end
+			-- 	end,
+			-- 	expr = true,
+			-- 	desc = 'Goto/Apply Next Edit Suggestion',
+			-- },
 			{
 				'<c-.>',
 				function()

@@ -16,7 +16,7 @@ return {
 						-- specify your custom previwer, or use one of the easypick.previewers
 						-- previewer = easypick.previewers.default(),
 						-- the command to execute when selecting an entry
-						action = easypick.actions.nvim_commandf('cd ' .. projectPath .. '%s | SessionRestore'),
+						action = easypick.actions.nvim_commandf('cd ' .. projectPath .. '%s | AutoSession restore'),
 						opts = require('telescope.themes').get_dropdown {},
 					},
 				},
@@ -33,7 +33,7 @@ return {
 			allowed_dirs = { '~/Elysium/Projects/*', '~/Elysium/Projects/*/*', '~/.config/nvim', '~/Elysium/Obsidian Vault/' },
 		},
 		keys = {
-			{ '<leader>os', '<cmd>SessionRestore<cr>', desc = '[o]pen [s]ession of current directory' },
+			{ '<leader>os', '<cmd>AutoSession restore<cr>', desc = '[o]pen [s]ession of current directory' },
 			{ '<leader>or', '<cmd>RecentSession<cr>', desc = '[o]pen [r]ecent session' },
 			{ '<leader>ss', '<cmd>Telescope session-lens<cr>', desc = '[s]earch [s]essions' },
 		},

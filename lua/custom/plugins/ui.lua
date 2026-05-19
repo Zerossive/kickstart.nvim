@@ -90,15 +90,16 @@ return {
 				{ '<leader>o', group = '[o]pen', icon = { icon = '' } },
 				{ '<leader>s', group = '[s]earch', icon = { icon = '' } },
 				{ '<leader>t', group = '[t]oggle', icon = { icon = '' } },
+				{ '<leader>a', group = '[a]i', icon = { icon = '󰧑' } },
+				{ '<leader>f', group = '[f]ind', icon = { icon = '󰈞' } },
 				-- visual mode
 				{ '<leader>c', group = '[c]ode', mode = { 'v', 'n', 'x' }, icon = { icon = '' } },
 				{ '<leader>h', group = '[h]unk', mode = { 'v', 'n' }, icon = { icon = '' } },
 				-- change icons for other commands
 				{ '<leader>w', icon = { icon = '󰆓', color = 'green' } },
 				{ '<leader>q', icon = { icon = '󰅗', color = 'red' } },
-				{ '<leader>a', icon = { icon = '󰱝', color = 'red' } },
-				{ '<leader>/', icon = { icon = '󰈞', color = 'purple' } },
-				{ '<leader>x', icon = { icon = '󰄲', color = 'azure' } },
+				{ '<leader>/', icon = { icon = '󱎸' } },
+				{ '<leader>x', icon = { icon = '󰄲' } },
 			},
 		},
 	},
@@ -134,53 +135,53 @@ return {
 			-- },
 		},
 	},
-	{
-		'folke/noice.nvim',
-		event = 'VeryLazy',
-		dependencies = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-			'MunifTanjim/nui.nvim',
-			-- OPTIONAL:
-			--   `nvim-notify` is only needed, if you want to use the notification view.
-			--   If not available, we use `mini` as the fallback
-			-- { 'rcarriga/nvim-notify', opts = { top_down = false, render = 'minimal', stages = 'fade_in_slide_out' } },
-		},
-		config = function()
-			local noice = require 'noice'
-			noice.setup {
-				lsp = {
-					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-					override = {
-						['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-						['vim.lsp.util.stylize_markdown'] = true,
-						['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
-					},
-					-- hover = { enabled = false },
-					-- signature = { enabled = false },
-				},
-
-				-- you can enable a preset for easier configuration
-				presets = {
-					bottom_search = true, -- use a classic bottom cmdline for search
-					command_palette = true, -- position the cmdline and popupmenu together
-					long_message_to_split = false, -- long messages will be sent to a split
-					inc_rename = false, -- enables an input dialog for inc-rename.nvim
-					lsp_doc_border = true, -- add a border to hover docs and signature help
-				},
-			}
-		end,
-	},
+	-- {
+	-- 	'folke/noice.nvim',
+	-- 	event = 'VeryLazy',
+	-- 	dependencies = {
+	-- 		'MunifTanjim/nui.nvim',
+	-- 	},
+	-- 	config = function()
+	-- 		local noice = require 'noice'
+	-- 		noice.setup {
+	-- 			lsp = {
+	-- 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+	-- 				override = {
+	-- 					['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+	-- 					['vim.lsp.util.stylize_markdown'] = true,
+	-- 					['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
+	-- 				},
+	-- 				-- hover = { enabled = false },
+	-- 				-- signature = { enabled = false },
+	-- 			},
+	--
+	-- 			-- you can enable a preset for easier configuration
+	-- 			presets = {
+	-- 				bottom_search = true, -- use a classic bottom cmdline for search
+	-- 				command_palette = true, -- position the cmdline and popupmenu together
+	-- 				long_message_to_split = false, -- long messages will be sent to a split
+	-- 				inc_rename = false, -- enables an input dialog for inc-rename.nvim
+	-- 				lsp_doc_border = true, -- add a border to hover docs and signature help
+	-- 			},
+	-- 		}
+	-- 	end,
+	-- },
 	{
 		'catgoose/nvim-colorizer.lua',
 		event = 'BufReadPre',
-		opts = { -- set to setup table
+		opts = {
 			filetypes = {
 				'*',
 				markdown = { names = false },
 			},
-			user_default_options = {
-				css = true,
-				tailwind = 'both',
+			options = {
+				parsers = {
+					tailwind = {
+						enable = true,
+						lsp = true,
+					},
+					css = true,
+				},
 			},
 		},
 		config = function(_, opts)

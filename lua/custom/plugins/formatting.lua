@@ -25,23 +25,13 @@ return {
 				-- ['*'] = { 'codespell' }, -- for all filetypes
 				['_'] = { 'trim_whitespace' }, -- for filetypes not listed
 			},
-			notify_on_error = false,
-			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
-				local lsp_format_opt
-				if disable_filetypes[vim.bo[bufnr].filetype] then
-					lsp_format_opt = 'never'
-				else
-					lsp_format_opt = 'fallback'
-				end
-				return {
-					timeout_ms = 500,
-					lsp_format = lsp_format_opt,
-				}
-			end,
+			notify_on_error = true,
+			notify_no_formatters = true,
+			format_on_save = {
+				-- These options will be passed to conform.format()
+				timeout_ms = 500,
+				lsp_format = 'fallback',
+			},
 			formatters = {
 				prettierd = {
 					prepend_args = {
@@ -109,34 +99,34 @@ return {
 			vim.g.bullets_checkbox_markers = '                   x'
 		end,
 	},
-	{
-		'luckasRanarison/tailwind-tools.nvim',
-		name = 'tailwind-tools',
-		build = ':UpdateRemotePlugins',
-		dependencies = {
-			'nvim-treesitter/nvim-treesitter',
-			'nvim-telescope/telescope.nvim', -- optional
-			'neovim/nvim-lspconfig', -- optional
-		},
-		opts = {}, -- your configuration
-		keys = {
-			{ '<leader>tt', '<cmd>TailwindConcealToggle<cr>', desc = '[t]oggle [t]ailwind conceal' },
-		},
-		config = function(_, opts)
-			require('tailwind-tools').setup { opts }
-
-			-- run :TailwindSort on save when tailwindcss-language-server is active
-			vim.api.nvim_create_autocmd('BufWritePre', {
-				callback = function()
-					local bufnr = vim.api.nvim_get_current_buf()
-					for _, client in ipairs(vim.lsp.get_clients { bufnr = bufnr }) do
-						if client.name == 'tailwindcss' then
-							pcall(vim.cmd, 'TailwindSort')
-							break
-						end
-					end
-				end,
-			})
-		end,
-	},
+	-- {
+	-- 	'luckasRanarison/tailwind-tools.nvim',
+	-- 	name = 'tailwind-tools',
+	-- 	build = ':UpdateRemotePlugins',
+	-- 	dependencies = {
+	-- 		'nvim-treesitter/nvim-treesitter',
+	-- 		'nvim-telescope/telescope.nvim', -- optional
+	-- 		'neovim/nvim-lspconfig', -- optional
+	-- 	},
+	-- 	opts = {}, -- your configuration
+	-- 	keys = {
+	-- 		{ '<leader>tt', '<cmd>TailwindConcealToggle<cr>', desc = '[t]oggle [t]ailwind conceal' },
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 		require('tailwind-tools').setup { opts }
+	--
+	-- 		-- run :TailwindSort on save when tailwindcss-language-server is active
+	-- 		vim.api.nvim_create_autocmd('BufWritePre', {
+	-- 			callback = function()
+	-- 				local bufnr = vim.api.nvim_get_current_buf()
+	-- 				for _, client in ipairs(vim.lsp.get_clients { bufnr = bufnr }) do
+	-- 					if client.name == 'tailwindcss' then
+	-- 						pcall(vim.cmd, 'TailwindSort')
+	-- 						break
+	-- 					end
+	-- 				end
+	-- 			end,
+	-- 		})
+	-- 	end,
+	-- },
 }

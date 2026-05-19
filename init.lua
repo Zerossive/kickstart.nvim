@@ -107,6 +107,8 @@ vim.opt.conceallevel = 1
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.spelllang = 'en_us'
+vim.opt.cmdheight = 0
+vim.opt.winborder = 'rounded'
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -128,8 +130,8 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- Normal mode
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'move up 1/2 page and center' })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'move down 1/2 page and center' })
-vim.keymap.set('n', '<leader>on', ':cd ~/.config/nvim | SessionRestore<CR>', { desc = '[o]pen [n]eovim config' })
-vim.keymap.set('n', '<leader>oo', ':cd ~/Elysium/Obsidian\\ Vault/ | SessionRestore<CR>', { desc = '[o]pen [o]bsidian vault' })
+vim.keymap.set('n', '<leader>on', ':cd ~/.config/nvim | AutoSession restore<CR>', { desc = '[o]pen [n]eovim config' })
+vim.keymap.set('n', '<leader>oo', ':cd ~/Elysium/Obsidian\\ Vault/ | AutoSession restore<CR>', { desc = '[o]pen [o]bsidian vault' })
 vim.keymap.set('n', '<leader>oq', ':e ~/Elysium/Obsidian\\ Vault/Quick\\ Note.md<CR>', { desc = '[o]pen [q]uick note' })
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = '[w]rite file' })
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = '[q]uit file' })
@@ -143,6 +145,40 @@ vim.keymap.set('n', '<leader>cc', function()
 end, { desc = '[c]opy all [c]ode' })
 vim.keymap.set('n', '<leader>bo', ':BufOnly<CR>', { desc = 'close [o]ther buffers' })
 vim.keymap.set('n', '<C-8>', 'viW*Ncgn', { desc = 'replace current word' })
+-- for i = 1, 9 do
+-- 	vim.keymap.set({ 'n', 'i', 'v' }, '<leader>' .. i, i .. 'gt', {
+-- 		desc = 'go to tab ' .. i,
+-- 	})
+-- end
+-- vim.keymap.set({ 'n', 'i', 'v' }, '<leader>0', '<cmd>tablast<cr>', {
+-- 	desc = 'go to last tab',
+-- })
+-- vim.keymap.set({ 'n', 'i', 'v' }, '<leader>>', '<cmd>tabnext<cr>', {
+-- 	desc = 'go to next tab',
+-- })
+-- vim.keymap.set({ 'n', 'i', 'v' }, '<leader><', '<cmd>tabprevious<cr>', {
+-- 	desc = 'go to pevious tab',
+-- })
+for i = 1, 9 do
+	vim.keymap.set({ 'n', 'i', 'v' }, '<m-' .. i .. '>', i .. 'gt', {
+		desc = 'go to tab ' .. i,
+	})
+end
+vim.keymap.set({ 'n', 'i', 'v' }, '<m-0>', '<cmd>tablast<cr>', {
+	desc = 'go to last tab',
+})
+vim.keymap.set({ 'n', 'i', 'v' }, '<m-.>', '<cmd>tabnext<cr>', {
+	desc = 'go to next tab',
+})
+vim.keymap.set({ 'n', 'i', 'v' }, '<m-,>', '<cmd>tabprevious<cr>', {
+	desc = 'go to pevious tab',
+})
+vim.keymap.set({ 'n', 'i', 'v' }, '<m->>', '<cmd>tabmove +1<cr>', {
+	desc = 'move tab right',
+})
+vim.keymap.set({ 'n', 'i', 'v' }, '<m-<>', '<cmd>tabmove -1<cr>', {
+	desc = 'move tab left',
+})
 
 -- Insert mode
 vim.keymap.set('i', 'jj', '<Escape>', { desc = 'normal mode' })
@@ -151,6 +187,14 @@ vim.keymap.set('i', '<C-8>', 'viW*Ncgn', { desc = 'replace current word' })
 
 -- Visual mode
 vim.keymap.set('v', '<C-r>', ':RC ', { desc = '[r]un command on selected text' })
+
+-- Other Configs
+--  Move help to the right
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'help',
+	command = 'wincmd L',
+	desc = 'Move help to the right',
+})
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info

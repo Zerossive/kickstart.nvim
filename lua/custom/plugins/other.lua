@@ -79,34 +79,34 @@ return {
 			end,
 		},
 	},
-	{
-		'uga-rosa/ccc.nvim',
-		config = function()
-			local ccc = require 'ccc'
-			ccc.setup {
-				default_color = '#008df8',
-				inputs = {
-					ccc.input.oklch,
-					ccc.input.hsl,
-					ccc.input.rgb,
-				},
-				outputs = {
-					ccc.output.hex,
-					ccc.output.hex_short,
-					ccc.output.css_rgb,
-					ccc.output.css_hsl,
-					ccc.output.css_oklch,
-				},
-				mappings = {
-					['?'] = function()
-						vim.cmd ':split | :help ccc-action'
-					end,
-				},
-				save_on_quit = true,
-			}
-			vim.keymap.set('n', '<leader>op', ':CccPick<CR>', { desc = '[o]pen color [p]icker' })
-		end,
-	},
+	-- {
+	-- 	'uga-rosa/ccc.nvim',
+	-- 	config = function()
+	-- 		local ccc = require 'ccc'
+	-- 		ccc.setup {
+	-- 			default_color = '#008df8',
+	-- 			inputs = {
+	-- 				ccc.input.oklch,
+	-- 				ccc.input.hsl,
+	-- 				ccc.input.rgb,
+	-- 			},
+	-- 			outputs = {
+	-- 				ccc.output.hex,
+	-- 				ccc.output.hex_short,
+	-- 				ccc.output.css_rgb,
+	-- 				ccc.output.css_hsl,
+	-- 				ccc.output.css_oklch,
+	-- 			},
+	-- 			mappings = {
+	-- 				['?'] = function()
+	-- 					vim.cmd ':split | :help ccc-action'
+	-- 				end,
+	-- 			},
+	-- 			save_on_quit = true,
+	-- 		}
+	-- 		vim.keymap.set('n', '<leader>op', ':CccPick<CR>', { desc = '[o]pen color [p]icker' })
+	-- 	end,
+	-- },
 	{ -- Add surround support
 		'kylechui/nvim-surround',
 		version = '*', -- Use for stability; omit to use `main` branch for the latest features
@@ -156,5 +156,29 @@ return {
 		ft = 'typst',
 		version = '1.*',
 		opts = {}, -- lazy.nvim will implicitly calls `setup {}`
+	},
+	{
+		'stevearc/quicker.nvim',
+		ft = 'qf',
+		---@module "quicker"
+		---@type quicker.SetupOptions
+		opts = {
+			keys = {
+				{
+					'>',
+					function()
+						require('quicker').expand { before = 2, after = 2, add_to_existing = true }
+					end,
+					desc = 'Expand quickfix context',
+				},
+				{
+					'<',
+					function()
+						require('quicker').collapse()
+					end,
+					desc = 'Collapse quickfix context',
+				},
+			},
+		},
 	},
 }
