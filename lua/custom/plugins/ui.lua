@@ -4,7 +4,7 @@ return {
 		name = 'catppuccin',
 		priority = 1000, -- make sure to load this before all the other start plugins
 		init = function()
-			vim.cmd.colorscheme 'catppuccin'
+			vim.cmd.colorscheme 'catppuccin-nvim'
 
 			-- You can configure highlights by doing something like
 			-- vim.cmd.hi 'Comment gui=none'
@@ -37,10 +37,6 @@ return {
 	{
 		'folke/which-key.nvim',
 		event = 'VeryLazy',
-		init = function()
-			-- Decrease mapped sequence wait time
-			vim.o.timeoutlen = 300
-		end,
 		opts = {
 			-- delay = 0,
 			icons = {
@@ -83,23 +79,26 @@ return {
 			-- Document existing key chains
 			spec = {
 				-- normal mode
-				{ '<leader><leader>', group = '[ ] filetype specific commands', icon = { icon = '󰵆' } },
-				{ '<leader>b', group = '[b]uffer', icon = { icon = '' } },
-				{ '<leader>g', group = '[g]it', icon = { icon = '󰊢' } },
-				{ '<leader>n', group = '[n]otifications', icon = { icon = '󰍡' } },
-				{ '<leader>o', group = '[o]pen', icon = { icon = '' } },
-				{ '<leader>s', group = '[s]earch', icon = { icon = '' } },
-				{ '<leader>t', group = '[t]oggle', icon = { icon = '' } },
-				{ '<leader>a', group = '[a]i', icon = { icon = '󰧑' } },
-				{ '<leader>f', group = '[f]ind', icon = { icon = '󰈞' } },
+				{ '<leader><leader>', group = 'filetype specific commands', icon = { icon = '󰵆' } },
+				{ '<leader>b', group = 'buffer', icon = { icon = '' } },
+				{ '<leader>g', group = 'git', icon = { icon = '󰊢' } },
+				{ '<leader>n', group = 'notifications', icon = { icon = '󰍡' } },
+				{ '<leader>o', group = 'open', icon = { icon = '' } },
+				{ '<leader>s', group = 'search', icon = { icon = '' } },
+				{ '<leader>t', group = 'toggle', icon = { icon = '' } },
+				{ '<leader>a', group = 'ai', icon = { icon = '󰧑' } },
+				{ '<leader>f', group = 'find', icon = { icon = '󰈞' } },
+				{ '<leader>p', group = 'plugin', icon = { icon = '󱐥' } },
 				-- visual mode
-				{ '<leader>c', group = '[c]ode', mode = { 'v', 'n', 'x' }, icon = { icon = '' } },
-				{ '<leader>h', group = '[h]unk', mode = { 'v', 'n' }, icon = { icon = '' } },
+				{ '<leader>c', group = 'code', mode = { 'v', 'n', 'x' }, icon = { icon = '' } },
+				{ '<leader>h', group = 'hunk', mode = { 'v', 'n' }, icon = { icon = '' } },
 				-- change icons for other commands
 				{ '<leader>w', icon = { icon = '󰆓', color = 'green' } },
+				{ '<leader>W', icon = { icon = '', color = 'green' } },
 				{ '<leader>q', icon = { icon = '󰅗', color = 'red' } },
+				{ '<leader>Q', icon = { icon = '', color = 'red' } },
 				{ '<leader>/', icon = { icon = '󱎸' } },
-				{ '<leader>x', icon = { icon = '󰄲' } },
+				{ '<leader>x', group = 'toggle checkbox', icon = { icon = '󰄲' } },
 			},
 		},
 	},
@@ -135,37 +134,6 @@ return {
 			-- },
 		},
 	},
-	-- {
-	-- 	'folke/noice.nvim',
-	-- 	event = 'VeryLazy',
-	-- 	dependencies = {
-	-- 		'MunifTanjim/nui.nvim',
-	-- 	},
-	-- 	config = function()
-	-- 		local noice = require 'noice'
-	-- 		noice.setup {
-	-- 			lsp = {
-	-- 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-	-- 				override = {
-	-- 					['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-	-- 					['vim.lsp.util.stylize_markdown'] = true,
-	-- 					['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
-	-- 				},
-	-- 				-- hover = { enabled = false },
-	-- 				-- signature = { enabled = false },
-	-- 			},
-	--
-	-- 			-- you can enable a preset for easier configuration
-	-- 			presets = {
-	-- 				bottom_search = true, -- use a classic bottom cmdline for search
-	-- 				command_palette = true, -- position the cmdline and popupmenu together
-	-- 				long_message_to_split = false, -- long messages will be sent to a split
-	-- 				inc_rename = false, -- enables an input dialog for inc-rename.nvim
-	-- 				lsp_doc_border = true, -- add a border to hover docs and signature help
-	-- 			},
-	-- 		}
-	-- 	end,
-	-- },
 	{
 		'catgoose/nvim-colorizer.lua',
 		event = 'BufReadPre',
@@ -187,7 +155,7 @@ return {
 		config = function(_, opts)
 			require('colorizer').setup(opts)
 
-			vim.keymap.set('n', '<LEADER>tc', '<CMD>ColorizerToggle<CR>', { desc = '[t]oggle [c]olorizer highlight' })
+			vim.keymap.set('n', '<LEADER>tc', '<CMD>ColorizerToggle<CR>', { desc = 'toggle colorizer highlight' })
 		end,
 	},
 	{
@@ -227,13 +195,5 @@ return {
 		dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
 		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
 		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-	},
-	{
-		'code-biscuits/nvim-biscuits',
-		opts = {
-			toggle_keybind = '<leader>tB',
-			show_on_start = true,
-			cursor_line_only = true,
-		},
 	},
 }

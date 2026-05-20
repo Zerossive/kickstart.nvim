@@ -2,7 +2,14 @@ return { -- Collection of various small independent plugins/modules
 	'echasnovski/mini.nvim',
 	config = function()
 		-- [[ Mini AI ]]
-		require('mini.ai').setup { n_lines = 500 }
+		require('mini.ai').setup {
+			-- Avoid conflicts with the built-in incremental selection mappings on Neovim>=0.12 (see `:help treesitter-incremental-selection`)
+			mappings = {
+				around_next = 'aa',
+				inside_next = 'ii',
+			},
+			n_lines = 500,
+		}
 
 		-- [[ Mini Statusline ]]
 		local statusline = require 'mini.statusline'
@@ -49,7 +56,7 @@ return { -- Collection of various small independent plugins/modules
 
 		-- [[ Mini Basics ]]
 		local basics = require 'mini.basics'
-		basics.setup { options = { extra_ui = true }, mappings = { windows = true, move_with_alt = true } }
+		basics.setup { options = { extra_ui = true }, mappings = { windows = true, move_with_alt = true, option_toggle_prefix = [[<leader>t]] } }
 
 		-- [[ Mini Indentscope ]]
 		require('mini.indentscope').setup()
@@ -81,7 +88,7 @@ return { -- Collection of various small independent plugins/modules
 				{ name = 'Quit', action = 'qall', section = 'Neovim' },
 				-- Custom
 				{ name = 'Recent Session', action = 'RecentSession', section = 'Custom' },
-				{ name = 'Projects', action = ':Easypick Projects', section = 'Custom' },
+				{ name = 'Projects', action = 'AutoSession search', section = 'Custom' },
 				{ name = 'Obsidian Vault', action = 'cd ~/Elysium/Obsidian\\ Vault/ | AutoSession restore', section = 'Custom' },
 				{ name = 'Neovim Config', action = 'cd ~/.config/nvim | AutoSession restore', section = 'Custom' },
 				-- Recent Files

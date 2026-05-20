@@ -19,21 +19,21 @@ return {
 				function()
 					Snacks.picker.smart()
 				end,
-				desc = '[f]ind files [s]mart',
+				desc = 'find files smart',
 			},
 			{
 				'<leader>ft',
 				function()
 					Snacks.picker()
 				end,
-				desc = '[f]ind picker [t]ypes',
+				desc = 'find picker types',
 			},
 			{
 				'<leader>fr',
 				function()
 					Snacks.picker.resume()
 				end,
-				desc = '[f]ind [r]esume',
+				desc = 'find resume',
 			},
 			-- find
 			{
@@ -41,42 +41,42 @@ return {
 				function()
 					Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
 				end,
-				desc = '[f]ind [c]onfig files',
+				desc = 'find config files',
 			},
 			{
 				'<leader>ff',
 				function()
 					Snacks.picker.files()
 				end,
-				desc = '[f]ind [f]iles',
+				desc = 'find files',
 			},
 			{
 				'<leader>fp',
 				function()
 					Snacks.picker.projects()
 				end,
-				desc = '[f]ind [p]rojects',
+				desc = 'find projects',
 			},
 			{
 				'<leader>fo',
 				function()
 					Snacks.picker.recent()
 				end,
-				desc = '[f]ind [o]ld files',
+				desc = 'find old files',
 			},
 			{
 				'<leader>fg',
 				function()
 					Snacks.picker.grep()
 				end,
-				desc = '[f]ind by [g]rep',
+				desc = 'find by grep',
 			},
 			{
 				'<leader>fw',
 				function()
 					Snacks.picker.grep_word()
 				end,
-				desc = '[f]ind current [w]ord',
+				desc = 'find current word',
 				mode = { 'n', 'x' },
 			},
 			{
@@ -84,49 +84,49 @@ return {
 				function()
 					Snacks.picker.notifications()
 				end,
-				desc = '[f]ind [n]otifications',
+				desc = 'find notifications',
 			},
 			{
 				'<leader>fd',
 				function()
 					Snacks.picker.diagnostics()
 				end,
-				desc = '[f]ind [d]iagnostics',
+				desc = 'find diagnostics',
 			},
 			{
 				'<leader>fh',
 				function()
 					Snacks.picker.help()
 				end,
-				desc = '[f]ind [h]elp',
+				desc = 'find help',
 			},
 			{
 				'<leader>fi',
 				function()
 					Snacks.picker.icons()
 				end,
-				desc = '[f]ind [i]cons',
+				desc = 'find icons',
 			},
 			{
 				'<leader>fk',
 				function()
 					Snacks.picker.keymaps()
 				end,
-				desc = '[f]ind [k]eymaps',
+				desc = 'find keymaps',
 			},
 			{
 				'<leader>fq',
 				function()
 					Snacks.picker.qflist()
 				end,
-				desc = '[f]ind [q]uickfix',
+				desc = 'find quickfix',
 			},
 			{
 				'<leader>fu',
 				function()
 					Snacks.picker.undo()
 				end,
-				desc = '[f]ind [u]ndo tree',
+				desc = 'find undo tree',
 			},
 			-- Buffer
 			{
@@ -134,28 +134,28 @@ return {
 				function()
 					Snacks.picker.buffers()
 				end,
-				desc = '[f]ind open [b]uffer [f]iles',
+				desc = 'find open buffer files',
 			},
 			{
 				'<leader>f/',
 				function()
 					Snacks.picker.lines()
 				end,
-				desc = '[f]ind in buffer [/]',
+				desc = 'find in buffer /',
 			},
 			{
 				'<leader>fbg',
 				function()
 					Snacks.picker.grep_buffers()
 				end,
-				desc = '[f]ind in open [b]uffers by [g]rep',
+				desc = 'find in open buffers by grep',
 			},
 			{
 				'<leader>fbd',
 				function()
 					Snacks.picker.diagnostics_buffer()
 				end,
-				desc = '[f]ind open [b]uffer [d]iagnostics',
+				desc = 'find open buffer diagnostics',
 			},
 			-- LSP
 			{
@@ -163,14 +163,14 @@ return {
 				function()
 					Snacks.picker.lsp_definitions()
 				end,
-				desc = '[g]oto [d]efinition',
+				desc = 'goto definition',
 			},
 			{
 				'gD',
 				function()
 					Snacks.picker.lsp_declarations()
 				end,
-				desc = '[g]oto [d]eclaration',
+				desc = 'goto declaration',
 			},
 			{
 				'gr',
@@ -178,21 +178,21 @@ return {
 					Snacks.picker.lsp_references()
 				end,
 				nowait = true,
-				desc = '[g]oto [r]eferences',
+				desc = 'goto references',
 			},
 			{
 				'gI',
 				function()
 					Snacks.picker.lsp_implementations()
 				end,
-				desc = '[g]oto [I]mplementation',
+				desc = 'goto Implementation',
 			},
 			{
 				'gy',
 				function()
 					Snacks.picker.lsp_type_definitions()
 				end,
-				desc = '[g]oto t[y]pe definition',
+				desc = 'goto type definition',
 			},
 
 			-- [[ Notifier ]]
@@ -201,14 +201,14 @@ return {
 				function()
 					Snacks.notifier.hide()
 				end,
-				desc = '[n]otifier [h]ide',
+				desc = 'notifier hide',
 			},
 			{
 				'<leader>nl',
 				function()
 					Snacks.notifier.show_history()
 				end,
-				desc = '[n]otifier [l]ist',
+				desc = 'notifier list',
 			},
 
 			-- [[ Lazygit ]]
@@ -217,7 +217,7 @@ return {
 				function()
 					Snacks.lazygit()
 				end,
-				desc = '[l]azy git',
+				desc = 'lazy git',
 			},
 
 			-- [[ GitHub ]]
@@ -226,14 +226,14 @@ return {
 				function()
 					Snacks.picker.gh_issue()
 				end,
-				desc = '[g]ithub [i]ssues',
+				desc = 'github issues',
 			},
 			{
 				'<leader>gI',
 				function()
 					Snacks.picker.gh_issue { state = 'all' }
 				end,
-				desc = '[g]ithub [i]ssues (all)',
+				desc = 'github issues (all)',
 			},
 
 			-- [[ Image ]]
@@ -242,7 +242,7 @@ return {
 				function()
 					Snacks.image.hover()
 				end,
-				desc = '[o]pen [i]mage',
+				desc = 'open image',
 			},
 		},
 	},

@@ -50,7 +50,7 @@ return {
 		keys = {
 			{
 				'-',
-				'<cmd>Oil<cr>',
+				'<cmd>Oil --preview<cr>',
 				desc = 'Oil: Open parent directory',
 				mode = 'n',
 			},

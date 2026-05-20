@@ -45,7 +45,7 @@ return {
 				-- end, -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
 			}
 
-			vim.keymap.set('n', '<LEADER>ta', '<CMD>SupermavenToggle<CR>', { desc = '[]t]oggle [a]i' })
+			vim.keymap.set('n', '<LEADER>ta', '<CMD>SupermavenToggle<CR>', { desc = 'toggle ai' })
 		end,
 	},
 	{

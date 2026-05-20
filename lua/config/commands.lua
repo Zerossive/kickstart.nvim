@@ -1,5 +1,3 @@
-local M = {}
-
 -- [[ Custom Commands ]]
 
 -- Example command
@@ -25,14 +23,16 @@ vim.api.nvim_create_user_command('BufOnly', function()
 		if not visible_buffers[buf] and buf ~= current_buffer then
 			local buf_modified = vim.fn.getbufvar(buf, '&modified') == 1
 			if buf_modified then
-				vim.api.nvim_err_writeln('Buffer ' .. buf .. ' has unsaved changes. Operation canceled.\n')
+				-- vim.api.nvim_err_writeln('Buffer ' .. buf .. ' has unsaved changes. Operation canceled.\n')
+				vim.api.nvim_echo({ { 'Buffer ' .. buf .. ' has unsaved changes. Operation canceled.\n' } }, true, { err = true })
 				return
 			else
 				vim.cmd('silent! bdelete ' .. buf)
 			end
 		end
 	end
-	vim.api.nvim_out_write 'All buffers closed\n'
+	-- vim.api.nvim_out_write 'All buffers closed\n'
+	vim.api.nvim_echo({ { 'All buffers closed\n' } }, true, {})
 end, { desc = 'Close all but current visible buffers' })
 
 -- Source the most recent session
@@ -76,5 +76,3 @@ vim.api.nvim_create_user_command('RC', function(opts)
 	local result = vim.fn.system('echo ' .. reg_a .. ' | ' .. opts.args)
 	print(result)
 end, { desc = 'Run code on selected text and print result', range = true, nargs = '+', complete = 'shellcmd' })
-
-return M
