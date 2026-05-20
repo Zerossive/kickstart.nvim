@@ -97,7 +97,6 @@ return {
 				{ '<leader>W', icon = { icon = '', color = 'green' } },
 				{ '<leader>q', icon = { icon = '󰅗', color = 'red' } },
 				{ '<leader>Q', icon = { icon = '', color = 'red' } },
-				{ '<leader>/', icon = { icon = '󱎸' } },
 				{ '<leader>x', group = 'toggle checkbox', icon = { icon = '󰄲' } },
 			},
 		},

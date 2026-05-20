@@ -36,13 +36,13 @@ return {
 				desc = 'find resume',
 			},
 			-- find
-			{
-				'<leader>fc',
-				function()
-					Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
-				end,
-				desc = 'find config files',
-			},
+			-- {
+			-- 	'<leader>fc',
+			-- 	function()
+			-- 		Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
+			-- 	end,
+			-- 	desc = 'find config files',
+			-- },
 			{
 				'<leader>ff',
 				function()
@@ -71,21 +71,14 @@ return {
 				end,
 				desc = 'find by grep',
 			},
-			{
-				'<leader>fw',
-				function()
-					Snacks.picker.grep_word()
-				end,
-				desc = 'find current word',
-				mode = { 'n', 'x' },
-			},
-			{
-				'<leader>fn',
-				function()
-					Snacks.picker.notifications()
-				end,
-				desc = 'find notifications',
-			},
+			-- {
+			-- 	'<leader>fw',
+			-- 	function()
+			-- 		Snacks.picker.grep_word()
+			-- 	end,
+			-- 	desc = 'find current word',
+			-- 	mode = { 'n', 'x' },
+			-- },
 			{
 				'<leader>fd',
 				function()
@@ -129,13 +122,13 @@ return {
 				desc = 'find undo tree',
 			},
 			-- Buffer
-			{
-				'<leader>fbf',
-				function()
-					Snacks.picker.buffers()
-				end,
-				desc = 'find open buffer files',
-			},
+			-- {
+			-- 	'<leader>fbf',
+			-- 	function()
+			-- 		Snacks.picker.buffers()
+			-- 	end,
+			-- 	desc = 'find open buffer files',
+			-- },
 			{
 				'<leader>f/',
 				function()
@@ -143,20 +136,20 @@ return {
 				end,
 				desc = 'find in buffer /',
 			},
-			{
-				'<leader>fbg',
-				function()
-					Snacks.picker.grep_buffers()
-				end,
-				desc = 'find in open buffers by grep',
-			},
-			{
-				'<leader>fbd',
-				function()
-					Snacks.picker.diagnostics_buffer()
-				end,
-				desc = 'find open buffer diagnostics',
-			},
+			-- {
+			-- 	'<leader>fbg',
+			-- 	function()
+			-- 		Snacks.picker.grep_buffers()
+			-- 	end,
+			-- 	desc = 'find in open buffers by grep',
+			-- },
+			-- {
+			-- 	'<leader>fbd',
+			-- 	function()
+			-- 		Snacks.picker.diagnostics_buffer()
+			-- 	end,
+			-- 	desc = 'find open buffer diagnostics',
+			-- },
 			-- LSP
 			{
 				'gd',
@@ -209,6 +202,13 @@ return {
 					Snacks.notifier.show_history()
 				end,
 				desc = 'notifier list',
+			},
+			{
+				'<leader>nf',
+				function()
+					Snacks.picker.notifications()
+				end,
+				desc = 'find notifications',
 			},
 
 			-- [[ Lazygit ]]
